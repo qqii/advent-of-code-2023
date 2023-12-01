@@ -1025,15 +1025,17 @@ e2 ← ⟨
   "7pqrstsixteen"
 ⟩
 
-d ← '0' + ↕10
-dw ← "one"‿"two"‿"three"‿"four"‿"five"‿"six"‿"seven"‿"eight"‿"nine"
+digits ← '0'+↕10
+digit_words ← "one"‿"two"‿"three"‿"four"‿"five"‿"six"‿"seven"‿"eight"‿"nine"
 
 # found on https://mlochbaum.github.io/bqncrate/
 # ∨ = or, can also use +
+IsDigit ← {∨´∘(digits⊸=)¨ 𝕩}
 # / drop, numpy's arr[arr_of_bools]
-ds ← (∨´∘(d⊸=)¨¨ e1) /¨ e1
-fl ← (⊏¨ ds) ∾¨ (¯1⊏¨ ds)
-p1 ← +´ •ParseFloat ¨ fl
+GetDigits ← {(IsDigit 𝕩) / 𝕩}
+FirstDigit ← {(⊏¨ GetDigits ¨ 𝕩)}
+FirstLast ← {(FirstDigit 𝕩) ∾¨ FirstDigit ⌽¨ 𝕩}
+•Show ⟨"Part 1", +´ •ParseFloat¨ FirstLast e1⟩
 
 # Taken from https://github.com/mlochbaum/bqn-libs/blob/master/strings.bqn
 # Usage: ⟨"cat"‿"red", "dog"‿"blue"⟩ ReplaceAll "My red cat"
@@ -1050,18 +1052,15 @@ ReplaceAll ← { ⟨old,new⟩ 𝕊 str:
   ⍋⊸⊏´ keep ∾¨ insert
 }
 
-# The find and replace function I found is for non overlapping instances, 
-# whereas we may have overlapping instances.
-# For example "3one8ncctmbsixeighttwonegb" -> 31, but a naive find and replace 
-# would give 32. The quick way to get around this is to reverse it.
-f ← ⟨dw, ⋈¨1↓d⟩⊸ ReplaceAll¨ e2
-b ← (⟨⌽¨dw, ⋈¨1↓d⟩)⊸ ReplaceAll¨ (⌽¨e2)
-# I really need to learn how to refactor this into an applicable function,
-# which is hopefully in the next tutorial.
-f_ds ← (∨´∘(d⊸=)¨¨ f) /¨ f
-b_ds ← (∨´∘(d⊸=)¨¨ b) /¨ b
-flw ← (⊏¨ f_ds) ∾¨ (⊏¨ b_ds)
-p2 ← +´ •ParseFloat ¨ flw
+FirstLastIncWords ← {
+  digits1 ← ⋈¨1↓digits
+  # ReplaceAll only works for non overlapping, but
+  # "3one8ncctmbsixeight_twone_gb" -> 31
+  f_replace ← ⟨digit_words, digits1⟩⊸ ReplaceAll¨ 𝕩
+  b_replace ← ⟨⌽¨digit_words, digits1⟩⊸ ReplaceAll¨ ⌽¨𝕩
+  (FirstDigit f_replace) ∾¨ FirstDigit b_replace
+}
+•Show ⟨"Part 2", +´ •ParseFloat¨ FirstLastIncWords e2⟩
 
 # Final thoughts:
 
