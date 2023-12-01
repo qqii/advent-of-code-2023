@@ -1,6 +1,7 @@
 # First time using an array programming language.
 
-# Written and executed in BQNPAD after finishing the "Expressions" and "List manipulation" tutorials, with the help of a lot of searching.
+# Written and executed in BQNPAD after finishing the "Expressions" and 
+# "List manipulation" tutorials, with the help of a lot of searching.
 # https://mlochbaum.github.io/BQN/tutorial/index.html
 
 # Manually created by applying regex transformations in vscode.
@@ -1014,8 +1015,18 @@ e1 ← ⟨
   "a1b2c3d4e5f"
   "treb7uchet"
 ⟩
+e2 ← ⟨
+  "two1nine"
+  "eightwothree" 
+  "abcone2threexyz"
+  "xtwone3four"
+  "4nineeightseven2"
+  "zoneight234"
+  "7pqrstsixteen"
+⟩
 
 d ← '0' + ↕10
+dw ← "one"‿"two"‿"three"‿"four"‿"five"‿"six"‿"seven"‿"eight"‿"nine"
 
 # found on https://mlochbaum.github.io/bqncrate/
 # ∨ = or, can also use +
@@ -1023,3 +1034,54 @@ d ← '0' + ↕10
 ds ← (∨´∘(d⊸=)¨¨ e1) /¨ e1
 fl ← (⊏¨ ds) ∾¨ (¯1⊏¨ ds)
 p1 ← +´ •ParseFloat ¨ fl
+
+# Taken from https://github.com/mlochbaum/bqn-libs/blob/master/strings.bqn
+# Usage: ⟨"cat"‿"red", "dog"‿"blue"⟩ ReplaceAll "My red cat"
+# Replace each instance of a string in old with the corresponding
+# string in new.
+# Instances are non-overlapping, and earlier ones take precedence.
+ReplaceAll ← { ⟨old,new⟩ 𝕊 str:
+  ! (≠new) ≡ l ← ≠old
+  "ReplaceAll: Can't replace empty" ! ∧´0<≠¨old
+  match ← 1-˜ (l+1)|⌊´ (↕⊸-l) × old (1<≠∘⊣)◶⟨⊑⊸=,≠∘⊢↑⍷⟩¨ <str
+  cont ← (-⟜1⌈≤⟜1×⊢)` match ⊏ (≠¨old)∾0
+  keep ← ⋈⟜(⊏⟜str) / 0=cont
+  insert ← (new⊏˜⊏⟜match)⊸(≠¨⊸/⋈∾∘⊣) / (0⊸<∧»⊸≤) cont
+  ⍋⊸⊏´ keep ∾¨ insert
+}
+
+# The find and replace function I found is for non overlapping instances, 
+# whereas we may have overlapping instances.
+# For example "3one8ncctmbsixeighttwonegb" -> 31, but a naive find and replace 
+# would give 32. The quick way to get around this is to reverse it.
+f ← ⟨dw, ⋈¨1↓d⟩⊸ ReplaceAll¨ e2
+b ← (⟨⌽¨dw, ⋈¨1↓d⟩)⊸ ReplaceAll¨ (⌽¨e2)
+# I really need to learn how to refactor this into an applicable function,
+# which is hopefully in the next tutorial.
+f_ds ← (∨´∘(d⊸=)¨¨ f) /¨ f
+b_ds ← (∨´∘(d⊸=)¨¨ b) /¨ b
+flw ← (⊏¨ f_ds) ∾¨ (⊏¨ b_ds)
+p2 ← +´ •ParseFloat ¨ flw
+
+# Final thoughts:
+
+# I'm sure the approach I took was pretty naive, and far from idomatic. I'm 
+# suprised by how quickly I'm remebering the symbols and keyboard shortcuts. It
+# was suprising how instinctivly I reached for ⊸, even though I wouldn't be
+# able to explain the presidence rules. ⟜ still eludes me, but I'm sure I'll
+# get there. 
+
+# The mixture of symbol memory combined with BQNPAD's word completion made made
+# pretty easy to express myself, but BQN's decision give symbols different words
+# tripped me up a few times. ¯ = minus, ↕ = range/windows (rather than iota).
+
+# BQNPAD also made my life a huge pain. Multiple times I accidentally closed the
+# window, and couldn't reopen it. Since it stores the text as part of the URL,
+# when I added the real input this made the URL too long and it wouldn't load.
+# I need to get a dev environment set up so I can run BQN locally.
+
+# The BQN resources also seem a lot sparser than APL. BQN is supposed to be the
+# new hotness, but I'm not sure how much of that is hype. The comparison with
+# other array languages (https://mlochbaum.github.io/BQN/doc/based.html) goes
+# pretty over my head, so it's to be seen how much benifit I'll get from 
+# starting with BQN.
