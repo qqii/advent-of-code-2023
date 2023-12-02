@@ -32,7 +32,7 @@ IsDigit ← {∨´∘(digits⊸=)¨ 𝕩}
 # / drop, numpy's arr[arr_of_bools]
 GetDigits ← {(IsDigit 𝕩) / 𝕩}
 FirstDigit ← {(⊏¨ GetDigits ¨ 𝕩)}
-FirstLast ← {(FirstDigit 𝕩) ∾¨ FirstDigit ⌽¨ 𝕩}
+FirstLast ← {𝕩 ∾¨○FirstDigit ⌽¨ 𝕩}
 •Show ⟨"Example Part 1", +´ •ParseFloat¨ FirstLast e1⟩
 
 # Taken from https://github.com/mlochbaum/bqn-libs/blob/master/strings.bqn
