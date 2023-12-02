@@ -10,8 +10,10 @@ e1 ← ⟨
   "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red"
   "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
 ⟩
+colors ← "red"‿"green"‿"blue"
+targets ← 12‿13‿14
 
-target ← ⟨"red"‿12, "green"‿13, "blue"‿14⟩
+
 # Taken from BQNcrate 
 # Split list 𝕩 at any sequence of characters in 𝕨
 Split ← {𝕨 ((⊢-˜¬×·+`»⊸<)∘∊˜⊔⊢) 𝕩}
@@ -30,13 +32,14 @@ RoundCols ← {(1+ 2×↕2÷˜≠𝕩) ⊏ 𝕩}
 RoundCount ← {•ParseFloat¨ (𝕨⊸≡¨ RoundCols 𝕩) / RoundNums 𝕩}
 # Maximum count of color 𝕨 in a game 𝕩 ⟨round, round, ...⟩
 GameMax ← {⌈´ ∾ 𝕨⊸RoundCount¨ 𝕩}
+ColorCount ← {GameMax⟜𝕩¨ colors}
 
-PossibleGame ← {(12 ≥ "red" GameMax 𝕩) ∧ (13 ≥ "green" GameMax 𝕩) ∧ (14 ≥ "blue" GameMax 𝕩)}
+PossibleGame ← ∧´ targets ≥ ColorCount
 Part1 ← {+´ (PossibleGame∘Records∘GameData¨𝕩) / (1+↕ ≠𝕩)}
 
 •Show ⟨"Example Part 1", Part1 e1⟩ 
 
-Power ← {("red" GameMax 𝕩) × ("green" GameMax 𝕩) × ("blue" GameMax 𝕩)}
+Power ← ×´ ColorCount
 •Show ⟨"Example Part 2", +´ Power∘Records∘GameData¨ e1⟩ 
 
 # Thoughts:
