@@ -36,9 +36,8 @@ Part1 ← {+´ (PossibleGame∘Records∘GameData¨𝕩) / (1+↕ ≠𝕩)}
 
 •Show ⟨"Example Part 1", Part1 e1⟩ 
 
-
-
-
+Power ← {("red" GameMax 𝕩) × ("green" GameMax 𝕩) × ("blue" GameMax 𝕩)}
+•Show ⟨"Example Part 2", +´ Power∘Records∘GameData¨ e1⟩ 
 
 # Thoughts:
 
@@ -52,3 +51,4 @@ Part1 ← {+´ (PossibleGame∘Records∘GameData¨𝕩) / (1+↕ ≠𝕩)}
 
 input ← •FLines "inputs/day2.txt"
 •Show ⟨"Part 1", Part1 input⟩ 
+•Show ⟨"Part 2", +´ Power∘Records∘GameData¨ input⟩ 
