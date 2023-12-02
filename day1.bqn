@@ -27,8 +27,7 @@ digits ← '0'+↕10
 digit_words ← "one"‿"two"‿"three"‿"four"‿"five"‿"six"‿"seven"‿"eight"‿"nine"
 
 # found on https://mlochbaum.github.io/bqncrate/
-# ∨ = or, can also use +
-IsDigit ← {∨´∘(digits⊸=)¨ 𝕩}
+IsDigit ← {('0' ≤ 𝕩) ∧ (𝕩 ≤ '9')}
 # / drop, numpy's arr[arr_of_bools]
 GetDigits ← {(IsDigit 𝕩) / 𝕩}
 FirstDigit ← {(⊏∘GetDigits¨ 𝕩)}
