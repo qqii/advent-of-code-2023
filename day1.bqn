@@ -31,7 +31,7 @@ digit_words ← "one"‿"two"‿"three"‿"four"‿"five"‿"six"‿"seven"‿"e
 IsDigit ← {∨´∘(digits⊸=)¨ 𝕩}
 # / drop, numpy's arr[arr_of_bools]
 GetDigits ← {(IsDigit 𝕩) / 𝕩}
-FirstDigit ← {(⊏¨ GetDigits ¨ 𝕩)}
+FirstDigit ← {(⊏∘GetDigits¨ 𝕩)}
 FirstLast ← {𝕩 ∾¨○FirstDigit ⌽¨ 𝕩}
 •Show ⟨"Example Part 1", +´ •ParseFloat¨ FirstLast e1⟩
 
