@@ -1,3 +1,5 @@
+#!/usr/bin/env cbqn
+
 # First time using an array programming language.
 
 # Written and executed in BQNPAD after finishing the "Expressions" and 
