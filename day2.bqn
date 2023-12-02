@@ -23,8 +23,7 @@ GameData ← ↓˜⟜(+⟜1∘⊐⟜':')
 # Drop the ⟨⟩ at the front, which comes from the space
 Records ← (1⊸↓", "⊸Split)¨ ∘ (";"⊸Split)
 
-# I'm sure I could do this better if I knew how to reshape
-# stuff
+# I'm sure I could do this better if I knew how to reshape stuff
 # ⊏ select, colors after number so +1
 RoundNums ← {(2×↕2÷˜≠𝕩) ⊏ 𝕩}
 RoundCols ← {(1+ 2×↕2÷˜≠𝕩) ⊏ 𝕩}
@@ -51,6 +50,18 @@ Power ← ×´ ColorCount
 
 # So in the end, welp, I've done the editing in BQNPAD again, taking care not to
 # exceed the character limit. 
+
+# This time I really struggled after reshaping the data. Reading up to 
+# combinators took a lot longer to digest than I expected, so without any
+# knowledge of how to reshape or index multi dimensional data I was stuck
+# resorting to create two functions, `RoundNums` and `RoundCols` to index into
+# the parsed data. I'm sure there's a better way to do this, especially given
+# how they're literally the same function, just with a different index.
+
+# I did manage to refactor `ColorCount` from calling and joining it twice, but
+# it needs to be the other way around in order to do away with the {} and 𝕩.
+# There's one tutorial article left but a suspiciously large amount of symbols
+# that I've still no idea about aside from seeing them in BQNcrate and the like.
 
 input ← •FLines "inputs/day2.txt"
 •Show ⟨"Part 1", Part1 input⟩ 
