@@ -39,10 +39,7 @@ Part1 ← +´ Points∘Parse¨
 Matches ← {+´(1⊑𝕩) ∊ ⊑𝕩}
 Part2 ← +´{
   p2 ← Matches∘Parse¨ 𝕩
-  Win ← {
-    # very not in the spirit, capturing p2 and all that
-    (0⥊˜⊢ 𝕨) ∾ (1⥊˜⊢ 𝕩) ∾ (0⥊˜⊢ (𝕨 -˜ 𝕩 -˜ ≠p2))
-  }
+  Win ← { (≠p2) ↑ (𝕨⥊0) ∾ 𝕩⥊1 }
   
   card ← ↕≠p2
   # Build this in perp for a fold, but I need the card index...
