@@ -37,17 +37,16 @@ Part1 ← +´ Points∘Parse¨
 •Show ⟨"Example Part 1", Part1 e1⟩ 
 
 Matches ← {+´(1⊑𝕩) ∊ ⊑𝕩}
-Zeros ← 0⥊˜⊢
 Part2 ← +´{
   p2 ← Matches∘Parse¨ 𝕩
   Win ← {
     # very not in the spirit, capturing p2 and all that
-    (Zeros 𝕨) ∾ (1 + Zeros 𝕩) ∾ (Zeros (𝕨 -˜ 𝕩 -˜ ≠p2))
+    (0⥊˜⊢ 𝕨) ∾ (1⥊˜⊢ 𝕩) ∾ (0⥊˜⊢ (𝕨 -˜ 𝕩 -˜ ≠p2))
   }
   
   card ← ↕≠p2
   # Build this in perp for a fold, but I need the card index...
-  tagged ← ⟨1+Zeros≠p2⟩ ∾ (card ⋈¨ {(1+↕≠𝕩) Win¨ 𝕩} p2)
+  tagged ← ⟨1⥊˜⊢≠p2⟩ ∾ (card ⋈¨ {(1+↕≠𝕩) Win¨ 𝕩} p2)
 
   Go ← {
     cards ← 𝕨
