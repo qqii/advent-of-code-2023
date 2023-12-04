@@ -15,8 +15,11 @@ e1 ← ⟨
 
 # From BQNCrate: Split 𝕩 at occurrences of separators 𝕨, removing the separators
 SplitSep ← {𝕨 ((⊢-˜¬×·+`»⊸<)∘∊˜⊔⊢) 𝕩}
-# I need to take some time to understand details of the (⊢-˜¬×·+`»⊸<) part of 
-# split to figure out why " " SplitSep "  x" ≡ ""‿"x"
+# dzaima again comes to explain:
+# (⊢-˜¬×·+`»⊸<)
+#    ≡
+# {𝕩 -˜ (¬𝕩) × +` (»𝕩) < 𝕩}
+# buy I need to work through why " " SplitSep "  x" ≡ ""‿"x"
 SplitSep0 ← {
   ss ← 𝕨 SplitSep 𝕩
   {0≠≠¨ ss}/ss
@@ -33,10 +36,38 @@ Points ← {⌊2⋆1-˜+´(1⊑𝕩) ∊ ⊑𝕩}
 Part1 ← +´ Points∘Parse¨
 •Show ⟨"Example Part 1", Part1 e1⟩ 
 
+Matches ← {+´(1⊑𝕩) ∊ ⊑𝕩}
+Zeros ← 0×↕
+Part2 ← +´{
+  p2 ← Matches∘Parse¨ 𝕩
+  Win ← {
+    # very not in the spirit, capturing p2 and all that
+    (Zeros 𝕨) ∾ (1 + Zeros 𝕩) ∾ (Zeros (𝕨 -˜ 𝕩 -˜ ≠p2))
+  }
+  
+  card ← ↕≠p2
+  # Build this in perp for a fold, but I need the card index...
+  tagged ← ⟨1+Zeros≠p2⟩ ∾ (card ⋈¨ {(1+↕≠𝕩) Win¨ 𝕩} p2)
 
+  Go ← {
+    cards ← 𝕨
+    i‿won ← 𝕩
+  
+    cards + won × i⊑cards
+  }
+  # left fold via ˜´⌽
+  Go˜´⌽ tagged
+}
+•Show ⟨"Example Part 2", Part2 e1⟩
 
 # Thoughts:
 
+# Part 1 wasn't too bad, but I need to study SplitSep more. Luckily grhkm
+# asked about it and dzaima has come to the rescue to break it down. 
+
+# Part 2 I really forced a fold. There must be a more idiomaic way using ↩ and
+# ⍟, or even a way to do it without capturing the number of cards in Win...?
+
 input ← •FLines "inputs/day4.txt"
 •Show ⟨"Part 1", Part1 input⟩ 
-# •Show ⟨"Part 2", input⟩ 
+•Show ⟨"Part 2", Part2 input⟩ 
