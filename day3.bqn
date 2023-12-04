@@ -1,5 +1,14 @@
 #!/usr/bin/env cbqn
 
+# You (me) notice that no number is more than 3 digits long. Why not take a 
+# different approach:
+
+# 1. Find symbols in grid via "#$%&*+-/=@"
+# 2. Propagate symbols in a moore neighbourhood to digits
+# 3. Propagate twice more over any L-R digits
+# 4. Mask the grid
+# 5. Parse and sum
+
 # Written after finishing the final tutorial, and skimming the "Quick Start".
 # Understanding arrays might have have been really useful, but I guess I'm out
 # of luck as they seems to have really increased the difficulty this year to
