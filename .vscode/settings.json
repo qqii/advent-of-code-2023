@@ -1,3 +1,5 @@
 {
     "nixEnvSelector.nixFile": "${workspaceRoot}/shell.nix",
+    // https://mlochbaum.github.io/BQN/fonts.html
+    "editor.fontFamily": "BQN386, JuliaMono, JetBrainsMono, monospace",
 }
