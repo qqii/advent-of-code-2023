@@ -46,7 +46,7 @@ Part2 ← +´{
   
   card ← ↕≠p2
   # Build this in perp for a fold, but I need the card index...
-  tagged ← ⟨1⥊˜⊢≠p2⟩ ∾ (card ⋈¨ {(1+↕≠𝕩) Win¨ 𝕩} p2)
+  tagged ← ⟨1¨p2⟩ ∾ (card ⋈¨ {(1+↕≠𝕩) Win¨ 𝕩} p2)
 
   Go ← {
     cards ← 𝕨
