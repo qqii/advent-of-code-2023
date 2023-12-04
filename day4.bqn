@@ -37,7 +37,7 @@ Part1 ← +´ Points∘Parse¨
 •Show ⟨"Example Part 1", Part1 e1⟩ 
 
 Matches ← {+´(1⊑𝕩) ∊ ⊑𝕩}
-Zeros ← 0×↕
+Zeros ← 0⥊˜⊢
 Part2 ← +´{
   p2 ← Matches∘Parse¨ 𝕩
   Win ← {
