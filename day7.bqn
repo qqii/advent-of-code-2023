@@ -95,6 +95,11 @@ Part2 ← {
 
 # All in all, I need to take a deeper look at ⍋ and ⍒.
 
+# Post Part 1 Thoughts:
+
+# Not the cleanest thing in the world, a lot of copy and pasting to change a few
+# things. ScoreHandJ is pretty ugly all things said, but it works! 
+
 input ← •FLines "inputs/day7.txt"
 •Show ⟨"Part 1", Part1 input⟩ 
 •Show ⟨"Part 2", Part2 input⟩ 
