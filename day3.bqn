@@ -16,12 +16,13 @@ input ← ⟨
 ⟩
 input ↩ •FLines "inputs/day3.txt"
 
-# From BQNcreate: Pad with a layer of fill elements on all sides
+# From BQNcrate: Pad with a layer of fill elements on all sides
 Pad ← (⊢↑˝·≍⟜¬2+≢)
+
 
 GetSymbols ← {¬".0123456789"∊˜𝕩}⊸/⍷∘∾
 symbols ← Pad (GetSymbols input) ∊˜ >input
-IsDigit ← {('0' ≤ 𝕩) ∧ (𝕩 ≤ '9')}
+IsDigit ← {('0'≤𝕩)∧(𝕩≤'9')}
 digits ← { (⊑𝕩∊'0'+↕10) ? (𝕩) ; (' ') }¨ Pad >input 
 
 # We need to pad these because Grow wraps the grid
