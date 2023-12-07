@@ -15,7 +15,7 @@ e1 ← ⟨
 ⟩
 
 Split ← {((¯1+⊢×·+`»⊸<)¬𝕩=𝕨)⊔𝕩}
-Parse ← •ParseFloat⌾(1⊸⊑)∘(' '⊸Split)¨
+Parse ← ⍉∘>•ParseFloat⌾(1⊸⊑)∘(' '⊸Split)¨
 
 hands ← ⌽⟨
   ⟨5⟩
@@ -36,11 +36,10 @@ ScoreCards ← (13⊸×⊸+˜´∘⌽) cards⊸⊐
 # Hands of 5 -> (ScoreHand 𝕩) × 13×5 
 Score ← (ScoreHand((13⋆5)⊸×⊸+)ScoreCards)
 Part1 ← {
-  t ← >Score⌾⊑¨ Parse 𝕩
-  st ← (⊏˘t)⍋⊸⊏t # From # https://mlochbaum.github.io/BQN/doc/order.html#stability
-  b ← ⥊1↓⍉ st
-  m ← 1+↕≠ b
-  +´ b×m
+  [c,b] ← Parse 𝕩
+  # ⍋ (Grade) gives the index if sorted, which is exactly what we need
+  # Just add 1 and you're golden. 
+  +´ b × 1+⍋ Score¨ c
 }
 •Show ⟨"Example Part 1", Part1 e1⟩ 
 
@@ -59,11 +58,10 @@ ScoreHandJ ← {
 ScoreCardsJ ← (13⊸×⊸+˜´∘⌽) cardsJ⊸⊐
 ScoreJ ← (ScoreHandJ((13⋆5)⊸×⊸+)ScoreCardsJ)
 Part2 ← {
-  t ← >ScoreJ⌾⊑¨ Parse 𝕩
-  st ← (⊏˘t)⍋⊸⊏t # From # https://mlochbaum.github.io/BQN/doc/order.html#stability
-  b ← ⥊1↓⍉ st
-  m ← 1+↕≠ b
-  +´ b×m
+  [c,b] ← Parse 𝕩
+  # ⍋ (Grade) gives the index if sorted, which is exactly what we need
+  # Just add 1 and you're golden. 
+  +´ b × 1+⍋ ScoreJ¨ c
 }
 •Show ⟨"Example Part 2", Part2 e1⟩ 
 
