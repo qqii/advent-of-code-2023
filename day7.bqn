@@ -35,12 +35,6 @@ ScoreHand ← ⊑hands⊒⋈ ∘ ∨∘CountOccurances
 ScoreCards ← (13⊸×⊸+˜´∘⌽) cards⊸⊐
 # Hands of 5 -> (ScoreHand 𝕩) × 13×5 
 Score ← (ScoreHand((13⋆5)⊸×⊸+)ScoreCards)
-
-# From BQNcrate: Sort 𝕩 descending according to column 𝕨
-SortBy ← (⊏⎉1⍒⊸⊏⊢)
-#p ← Parse input
-#s ← ⍋ Score∘⊑¨ p
-#b ← 1⊑¨ p
 Part1 ← {
   t ← >Score⌾⊑¨ Parse 𝕩
   st ← (⊏˘t)⍋⊸⊏t # From # https://mlochbaum.github.io/BQN/doc/order.html#stability
