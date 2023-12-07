@@ -100,6 +100,48 @@ Part2 ← {
 # Not the cleanest thing in the world, a lot of copy and pasting to change a few
 # things. ScoreHandJ is pretty ugly all things said, but it works! 
 
+# https://bqn.funmaker.moe/'s glyph highlighting is really nice, and I've been
+# able click less symbols. That said I'm not sure if I'm remembering the
+# shortcut or just the glyph location, just as I did with BQNPAD. 
+
+# Without tab autocomplete there's less memory for symbol names, which has it's
+# good and bad side. I'm still going to stick with it though, in hopes of 
+# being able to shell out symbols without thought.
+
+# As an idea, maybe popping up the keymap as a keyboard will form a better
+# association? 
+# https://mlochbaum.github.io/BQN/keymap.html
+
+# I acidentally pressed Ctrl s a dozen times, saving the file. This is a minor
+# annoyance, but also the highest praise an editor can get - it's so good that
+# I'm Ctrl s ing out of muscle memory. 
+
+# The split window is really nice, and mirrors having a code window and
+# terminal. Being able to keep the code window in a fixed location whilst also
+# seeing the output was a great decision. The only mild annoyance is having to
+# use the mouse to expand/contract the window - maybe a fold-up output? 
+
+# The other thing to factor is the live preview. I do miss it a bit, but at the
+# same time it forces me to think thorugh a problem before checking the output
+# or getting distracted by errors.
+
+# I couldn't figure out how to read input.txt so I eventually copied it back to
+# my local editor. My go-to is •FLines, so without it a lot of my code
+# assumptions break.
+
+# Rapid fire now:
+# - Ctrl / doesn't add a space, and doesn't uncomment indented comments. Meh,
+#   a style thing.
+# - The data is not stored in the URL (so no accidentally corrupting the page
+#   with too much data, but also no sharing links)
+
+# That's about it, my vscode font is still broken is tab auto-complete and has
+# spacing issues in the terminal, whilst beacon doesn't seem that easy to
+# install. This is a good local maximum, and funmaker seems interested in
+# continuing to improve it.
+
+# Now to take a deeper read about ⍋ and ⍒.
+
 input ← •FLines "inputs/day7.txt"
 •Show ⟨"Part 1", Part1 input⟩ 
 •Show ⟨"Part 2", Part2 input⟩ 
