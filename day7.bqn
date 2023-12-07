@@ -1,6 +1,6 @@
 #!/usr/bin/env cbqn
 
-# Initial Idea:
+# Part 1 Initial Idea:
 # Build a table with headings:
 # [ "Hand", "Bid", "Hand Score", "Card Score"]
 # "Card Score" should be equivilent to comparing for the highest consecutive
@@ -50,6 +50,29 @@ Part1 ← {
 }
 •Show ⟨"Example Part 1", Part1 e1⟩ 
 
+# Part 2 Initial Idea:
+# Calculate the hand without jokers, then add 1 to the highest group before
+# scoring.
+
+cardsJ ← "J23456789TQKA"
+ScoreHandJ ← {
+  "JJJJJ"≡𝕩 ? 6 ;
+  js ← +´'J'= 𝕩
+  not_js ← 'J'⊸≠⊸/ 𝕩
+  j_h ← js+⌾⊑ ∨∘CountOccurances not_js
+  ⊑hands⊒⋈ j_h
+}
+ScoreCardsJ ← (13⊸×⊸+˜´∘⌽) cardsJ⊸⊐
+ScoreJ ← (ScoreHandJ((13⋆5)⊸×⊸+)ScoreCardsJ)
+Part2 ← {
+  t ← >ScoreJ⌾⊑¨ Parse 𝕩
+  st ← (⊏˘t)⍋⊸⊏t # From # https://mlochbaum.github.io/BQN/doc/order.html#stability
+  b ← ⥊1↓⍉ st
+  m ← 1+↕≠ b
+  +´ b×m
+}
+•Show ⟨"Example Part 2", Part2 e1⟩ 
+
 # Initial Thoughts:
 
 # Trying out https://bqn.funmaker.moe/ today to replace BQNPAD. There's a bunch
@@ -74,3 +97,4 @@ Part1 ← {
 
 input ← •FLines "inputs/day7.txt"
 •Show ⟨"Part 1", Part1 input⟩ 
+•Show ⟨"Part 2", Part2 input⟩ 
