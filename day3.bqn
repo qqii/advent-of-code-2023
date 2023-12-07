@@ -2,7 +2,7 @@
 
 # Written after day 4, because of a logical error with the first attempt. 
 
-e1 ← ⟨
+input ← ⟨
   "467..114.."
   "...*......"
   "..35..633."
@@ -14,15 +14,15 @@ e1 ← ⟨
   "...$.*...."
   ".664.598.."
 ⟩
-e1 ↩ •FLines "inputs/day3.txt"
+input ↩ •FLines "inputs/day3.txt"
 
 # From BQNcreate: Pad with a layer of fill elements on all sides
 Pad ← (⊢↑˝·≍⟜¬2+≢)
 
 GetSymbols ← {¬".0123456789"∊˜𝕩}⊸/⍷∘∾
-symbols ← Pad (GetSymbols e1) ∊˜ >e1
+symbols ← Pad (GetSymbols input) ∊˜ >input
 IsDigit ← {('0' ≤ 𝕩) ∧ (𝕩 ≤ '9')}
-digits ← { (⊑𝕩∊'0'+↕10) ? (𝕩) ; (' ') }¨ Pad >e1 
+digits ← { (⊑𝕩∊'0'+↕10) ? (𝕩) ; (' ') }¨ Pad >input 
 
 # We need to pad these because Grow wraps the grid
 parsed ← symbols ⋈¨ digits
@@ -59,11 +59,11 @@ Ints ← {•ParseFloat¨((¯1+⊢×·+`»⊸<)𝕩∊'0'+↕10)⊔𝕩}
 # digits on two lines joining. 
 # https://mlochbaum.github.io/BQN/doc/fill.html
 init ← Cull¨ Grow ⌾ (⊑¨) parsed
-fin ← Harvest¨ Cull¨∘Spread⍟(1-˜MaxDigitLen e1) init
+fin ← Harvest¨ Cull¨∘Spread⍟(1-˜MaxDigitLen input) init
 •Show ⟨"Part 1", +´ Ints ⥊ fin⟩ 
 
 # ========== Part 2
-gears ← Pad '*'= >e1
+gears ← Pad '*'= >input
 
 # # https://github.com/dzaima/aoc/blob/master/2023/BQN/3.bqn
 # Pre-identifying the part numbers that belong 
