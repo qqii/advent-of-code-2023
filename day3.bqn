@@ -56,37 +56,37 @@ MaxDigitLen ← {⌈´ ≠¨ ∾ SplitDigits¨ 𝕩}
 Ints ← {•ParseFloat¨((¯1+⊢×·+`»⊸<)𝕩∊'0'+↕10)⊔𝕩}
 
 # We've padded this already, so it's safe to ⥊ this without worrying about
-# digits on two lines joining. Somehow we've lost the fill, so can't use
-# SplitDigits
+# digits on two lines joining. 
 # https://mlochbaum.github.io/BQN/doc/fill.html
 init ← Cull¨ Grow ⌾ (⊑¨) parsed
 fin ← Harvest¨ Cull¨∘Spread⍟(1-˜MaxDigitLen e1) init
-•Out "Part 1: " ∾ •Fmt +´ Ints ⥊ fin
+•Show ⟨"Part 1", +´ Ints ⥊ fin⟩ 
 
+# ========== Part 2
+gears ← Pad '*'= >e1
 
+# # https://github.com/dzaima/aoc/blob/master/2023/BQN/3.bqn
+# Pre-identifying the part numbers that belong 
+# togther at the start makes our lives much easier as we don't
+# have to try to figure that out at a cellular automata level!
+part_ix ← ¯1+(+`1∾1‿0⍷⊢)⌾⥊⊸× ' '≠digits
+part_n ← •ParseFloat¨ part_ix⊔digits
 
-# Thoughts:
+Moore ← {⌽⟜𝕩¨⋈⌜˜¯1‿0‿1}
 
-# I struggled with this problem. A lot of this came down to lack of planning and
-# just taking the head first approach. In both solutions I discarded vital
-# information at the beginning, calculating something completely different!
+# These magical functions come from Marshall, aka mlochbaum, the creator of BQN
+# There's all types of higher order array wrangling
+# <⎉1⍉∘>∘⥊ # list variant, colapses internal shape information
+# <⎉2⍉⍟2> # shape preserving variant
+# =⊸{<⎉𝕨⍉⍟𝕨>𝕩} # generic shape preserving, in bqncrate
+# Invert array of same-rank arrays, exchanging inner with outer axes
+Magic ← {𝕨 <⎉2⍉⍟2> 𝕩}
+Exactly2 ← {
+  g ← ⊑1↓˘1↓ ⊑¨ 𝕩
+  p ← ¯1⊸≠⊸/ ⍷ 1⊑¨ ⥊ 𝕩
+  g∧2=≠p ? p ; ⟨⟩
+}
+Cleanup ← ⟨⟩⊸≢¨⊸/⍷∘⥊
 
-# There's quite a lot going on this time, so I've skipped wrapping it up into a
-# nice function and used ↩ instead. For on-offs, using captures can simplfy
-# the expression, even if it isn't tactic or idiomatic.
-
-# Original Pre-Thoughts:
-
-# The Quick Start really shows off a lot more BQN that I ever thought existed!
-# There's syntax to do pseudo-procedural programming! I wonder how much overlap
-# there is with other array languages.
-
-# I couldn't get beacon installed, so I'm giving up on that for now. Someone in
-# the discord mentioned that you should install cbqn-replxx via nix to get the
-# \ shortcuts. cbqn also has system commands such as )e in addition to
-# additional system functions.
-# (https://github.com/dzaima/CBQN/blob/master/docs/README.md)
-
-# My current terminal font causes ⌾ to overlap with the next character, and I
-# need a replacement to BQNPAD's list of characters but once those are sorted
-# I can try moving to local development.
+p2 ← +´ (×´⊏⟜part_n)¨ Cleanup Exactly2¨ Magic Moore gears ⋈¨ part_ix
+•Show ⟨"Part 2", p2⟩ 
