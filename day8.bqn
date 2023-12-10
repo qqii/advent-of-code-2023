@@ -131,13 +131,29 @@ Part2 ← {
 
 # Part 2 Initial Thoughts:
 
-# The difficulty here will really depend on how many nodes end with A. If there are too many then there's probably a trick, but part A was deceptively simple. 
+# The difficulty here will really depend on how many nodes end with A. If there
+# are too many then there's probably a trick, but part A was deceptively simple. 
 
 # The simple approach, which may be inefficient is to:
 
 # 1. Find all that ends with A
 # 2. Run the loop against each of them
 # 3. Calculate the least common multiple between them
+
+# Final thoughts
+
+# This was supringly easy, and I thought I would have to reach for a more
+# complex tool than the LCM. The lack of automatic PPrintB adds just the touch
+# of friction to using namespaces instead of ad-hoc ‿s or 𝕨 𝕩. 
+
+# I've used the system versions of •_while_ and •math.LCM for simplicity, but I
+# should really take a look at how they are implemented - especially LCM/GCD.
+
+# I'm now a few days behind, and I still need to get back to day 5. Day 9 looks
+# easy enough, with `, •_while_ and list wrangling. 10 looks like a bitch -
+# there's annoying parsing in addition to more moore neighborhood stuff. Last
+# time (day 3) I did it cellular automata style but this time I should try
+# keeping an index list.
 
 # bqn.js doens't support •FLines, but does support •GetLine.
 # This snippet was kindly shared with me by funmaker
