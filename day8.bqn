@@ -65,7 +65,7 @@ Part1 ← {
   (data Step •_while_ Cond { steps ⇐ 0 ⋄ node ⇐ data.start }).steps
 }
 •Show ⟨"Example 1 Part 1", Part1 e1⟩
-•Show ⟨"Example 1 Part 1", Part1 e2⟩
+•Show ⟨"Example 2 Part 1", Part1 e2⟩
 
 e3 ← ⟨
   "LR"
@@ -95,15 +95,15 @@ ParseA ← {
 CondZ ← {
   data ← 𝕨
   state ← 𝕩
-  ∨´ state.node ⍷ data.ends
+  ¬ ∨´ state.node ⍷ data.ends
 }
 Part2 ← {
   data ← ParseA 𝕩
   inits ← { steps ⇐ 0 ⋄ node ⇐ 𝕩 }¨ data.starts
   each ← (data⊸(Step •_while_ CondZ))¨ inits
+  •math.LCM´ (•ns.Get⟜"steps")¨ each
 }
-#{𝕩 •ns.Get "steps"}¨
-PPrintB¨ Part2 e3
+•Show ⟨"Example 3 Part 3", Part2 e3⟩
 
 # Part 1 Initial Thoughts:
 
@@ -141,7 +141,7 @@ PPrintB¨ Part2 e3
 
 # bqn.js doens't support •FLines, but does support •GetLine.
 # This snippet was kindly shared with me by funmaker
-#input ← 1 ↓ ¯1 ↓ (⊢ ∾⟜< •GetLine)•_while_(@ ≢ ¯1 ⊑ ⊢) ⟨""⟩
-#input ← •FLines "inputs/day8.txt"
-#•Show ⟨"Part 1", Part1 input⟩ 
-#•Show ⟨"Part 2", Part2 input⟩
+# input ← 1 ↓ ¯1 ↓ (⊢ ∾⟜< •GetLine)•_while_(@ ≢ ¯1 ⊑ ⊢) ⟨""⟩
+input ← •FLines "inputs/day8.txt"
+•Show ⟨"Part 1", Part1 input⟩ 
+•Show ⟨"Part 2", Part2 input⟩
